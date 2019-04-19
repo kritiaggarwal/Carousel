@@ -1,33 +1,128 @@
-.App {
-  text-align: center;
+:root {
+  --main-blue: #0D71A6; 
+  --main-green: #50C9A1;
+  --main-white: #FFFFFF;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+html, body, #container, .carousel {
+	height:100%;
+	margin: 0;
+	width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h3 {
+  color: var(--main-blue);
+}
+
+.carousel {
+  margin: 10px;
+  overflow: hidden;
+  width: 98%;
+}
+
+/* Start - Desktops Images */
+.image-container {
+  padding: 10px;
+}
+
+.image-matrix {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: stretch;
 }
 
-.App-link {
-  color: #61dafb;
+.image-slide-container {
+  height: 300px;
+  width: 300px;
+  padding: 5px 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.image-slide-container > img {
+  height: auto;
+  width: 250px;
+}
+
+.image-title {
+  padding: 5px 0;
+  font-size: 18px;
+  text-align: center;
+  color: var(--main-blue);
+}
+
+/* Buttons */
+.button-container {
+  text-align: center;
+  padding: 10x;
+}
+
+.button-class {
+  width: 70px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--main-white);
+  margin: 2px;
+  background: var(--main-blue);
+  border: 1px solid var(--main-blue);
+}
+
+.button-class:focus {
+  outline: none;
+}
+
+.button-class.prev-button {
+  border-radius: 8px 0 0 8px;
+}
+
+.button-class.next-button {
+  border-radius: 0 8px 8px 0;
+}
+
+/* End - Desktops Images */
+
+/* Start - Mobile Images */
+.image-slide {
+	height: 100%;
+	width: 98%;
+	transition: background-image .3s ease-in-out;
+}
+
+.slide-arrow {
+	color: #14B6D4;
+	cursor: pointer;
+	font-size: 2rem;
+	position: absolute;
+  top: 26%;
+  background-color: #fff;
+  opacity: 0.6;
+
+  height: 90px;
+  width: 45px;
+}
+
+.slide-arrow.next-icon {
+  right: 0.3rem;
+  border-bottom-left-radius: 90px;
+  border-top-left-radius: 90px;
+}
+
+.slide-arrow.prev-icon {
+  left: 0.3rem;
+  border-bottom-right-radius: 90px;
+  border-top-right-radius: 90px;
+}
+
+.slide-arrow.next-icon > img {
+  position: absolute;
+  height: 52px;
+  top: 22%;
+  right: 0;
+}
+
+.slide-arrow.prev-icon > img {
+  transform: rotate(180deg);
+  position: absolute;
+  height: 52px;
+  top: 22%;
+  left: 0;
 }
