@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class ImageSlide extends Component {
 
     render() {
-        const isMobile = this.props.device === 'mobile' ? true : false;
+        const isMobile = this.props.showMobileView;
         if (isMobile) {
             return (
                 <div role="img" aria-label="container for carousel images">
@@ -22,8 +22,8 @@ class ImageSlide extends Component {
             return (
                 <div className="image-container">
                     <div className="image-matrix" role="img" aria-label="carousel images">
-                        {this.props.url.map(item => (
-                            <div key={item.id} className="image-slide-container">
+                        {this.props.url.map( (item, index) => (
+                            <div key={index} className="image-slide-container">
                                 <img
                                     className="desktop-image-slide"
                                     src={item.url} alt={item.title}

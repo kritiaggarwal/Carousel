@@ -70,6 +70,7 @@ h3 {
   background: var(--main-blue);
   border: 1px solid var(--main-blue);
   font-family: var(--main-font-family);
+  cursor: pointer;
 }
 
 .button-class:focus {

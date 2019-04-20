@@ -2,30 +2,27 @@ import React, { Component } from 'react';
 import ImageSlide from './ImageSlide';
 import Arrow from './Arrow';
 import Button from './Button';
-
+import * as Constants from '../constants/index';
 
 class Carousel extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            imgData: [],
-            currentImageIndex: 0,
-            currentImageArray: [],
-            width: window.innerWidth
+            imgData: [],    // this will store all image data fetched from api
+            currentImageIndex: 0,   // this is active index for the image in carousel
+            currentImageArray: [],  // this array will hold the images data to be shown in desktop, say in our case 5 images
+            width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0) // this will store client width to check for responsiveness
         };
-
-        this.nextSlide = this.nextSlide.bind(this);
-        this.previousSlide = this.previousSlide.bind(this);
-
-        this.nextSlideForDesktop = this.nextSlideForDesktop.bind(this);
-        this.previousSlideForDesktop = this.previousSlideForDesktop.bind(this);
     }
 
     componentDidMount() {
-        const key = `9656065-a4094594c34f9ac14c7fc4c39`;
-        const url = `https://pixabay.com/api/?key=${key}&q=beautiful+landscape&image_type=photo`;
+        window.addEventListener('resize', this.handleWindowSizeChange);
 
+        const key = Constants.API_KEY;
+        const url = `${Constants.IMAGES_URL}${key}&q=beautiful+landscape&image_type=photo`;
+
+        // Fetch images data from api call & save in state required properties
         fetch(url, { mode: 'cors' })
             .then(response => {
                 return response.json();
@@ -56,11 +53,11 @@ class Carousel extends Component {
     }
 
     handleWindowSizeChange = () => {
-        this.setState({ width: window.innerWidth });
+        this.setState({ width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0) });
     };
 
     // Function to show previous slide on click of prev button in mobile devices
-    previousSlide() {
+    previousSlide = () => {
         const lastIndex = this.state.imgData.length - 1;
         const { currentImageIndex } = this.state;
         const shouldResetIndex = currentImageIndex === 0;
@@ -72,7 +69,7 @@ class Carousel extends Component {
     }
 
     // Function to show next slide on click of next button in devices other than mobile
-    nextSlide() {
+    nextSlide = () => {
         const lastIndex = this.state.imgData.length - 1;
         const { currentImageIndex } = this.state;
         const shouldResetIndex = currentImageIndex === lastIndex;
@@ -84,7 +81,7 @@ class Carousel extends Component {
     }
 
     // Function to show previous slide on click of prev button in desktop devices where multiple images are handled
-    previousSlideForDesktop() {
+    previousSlideForDesktop = () => {
         const length = this.state.imgData.length;
         const lastIndex = length - 1;
         const { currentImageIndex } = this.state;
@@ -107,8 +104,8 @@ class Carousel extends Component {
         });
     }
 
-    // Function to show previous slide on click of prev button in desktop devices where multiple images are handled
-    nextSlideForDesktop() {
+    // Function to show next slide on click of next button in desktop devices where multiple images are handled
+    nextSlideForDesktop = () => {
         const length = this.state.imgData.length;
         const lastIndex = length - 1;
 
@@ -121,32 +118,32 @@ class Carousel extends Component {
         let currentArray = [];
 
         if (shouldResetSlides > 0) {
-            currentArray = [...this.state.imgData.slice(currentImageIndex, length), ...this.state.imgData.slice(0, shouldResetSlides)]
+            currentArray = [...this.state.imgData.slice(index, length), ...this.state.imgData.slice(0, shouldResetSlides)]
         } else {
-            currentArray = [...this.state.imgData.slice(currentImageIndex, currentImageIndex + 5)]
+            currentArray = [...this.state.imgData.slice(index, index + 5)]
         }
 
         this.setState({
             currentImageIndex: index,
             currentImageArray: currentArray
         });
-        console.log('State', this.state.currentImageArray)
+        console.log('State', this.state.currentImageArray);
     }
 
     render() {
         const { width } = this.state;
-        const isMobile = width <= 500;
+        const isMobile = width <= (Constants.MOBILE_MAX_WIDTH);
 
         if (isMobile) {
             // if device is mobile, show carousel with arrow
             return (
-                <section className="carousel">
+                <section className="carousel" role="banner">
                     <h3> Carousel </h3>
                     <Arrow
                         direction="prev-icon"
                         clickFunction={this.previousSlide}
                     />
-                    <ImageSlide device='mobile' url={this.state.imgData[this.state.currentImageIndex]} />
+                    <ImageSlide showMobileView={true} url={this.state.imgData[this.state.currentImageIndex]} />
                     <Arrow
                         direction="next-icon"
                         clickFunction={this.nextSlide}
@@ -155,10 +152,10 @@ class Carousel extends Component {
             );
 
         } else {
-            // if device is not mobile, show carousel with multiple images at once time
+            // if device is not mobile, show carousel with multiple images at one time
             return (
-                <section className="carousel">
-                    <ImageSlide device='desktop' url={this.state.currentImageArray} />
+                <section className="carousel" role="banner">
+                    <ImageSlide showMobileView={false} url={this.state.currentImageArray} />
                     <div className="button-container">
                         <Button
                             direction="prev-button"
