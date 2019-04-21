@@ -18,6 +18,10 @@ h3 {
   font-family: var(--main-font-family);
 }
 
+.loader-container{
+  text-align: center;
+}
+
 .carousel {
   margin: 10px;
   overflow: hidden;
@@ -57,7 +61,7 @@ h3 {
 /* Buttons */
 .button-container {
   text-align: center;
-  padding: 10x;
+  padding: 10px;
 }
 
 .button-class {
@@ -88,6 +92,10 @@ h3 {
 /* End - Desktops Images */
 
 /* Start - Mobile Images */
+.mobile-carousel {
+  position: relative;
+}
+
 .image-slide {
 	height: 100%;
 	width: 98%;
@@ -99,7 +107,7 @@ h3 {
 	cursor: pointer;
 	font-size: 2rem;
 	position: absolute;
-  top: 26%;
+  top: 35%;
   background-color: #fff;
   opacity: 0.6;
   height: 90px;
@@ -113,7 +121,7 @@ h3 {
 }
 
 .slide-arrow.prev-icon {
-  left: 0.3rem;
+  left: 0;
   border-bottom-right-radius: 90px;
   border-top-right-radius: 90px;
 }
