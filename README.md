@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Steps to get started with the project:
-cd carousel-poc
+cd carousel-poc <br>
 npm i
 
 ### To run the project:
@@ -14,7 +14,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
 ### To test the project:
-cd carousel-poc
 npm test
 
 Launches the test runner in the interactive watch mode.<br>
