@@ -98,7 +98,6 @@ h3 {
 .image-slide {
 	height: 100%;
 	width: 100%;
-	transition: background-image .3s ease-in-out;
 }
 
 .slide-arrow {
