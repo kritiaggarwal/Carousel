@@ -97,7 +97,7 @@ h3 {
 
 .image-slide {
 	height: 100%;
-	width: 98%;
+	width: 100%;
 	transition: background-image .3s ease-in-out;
 }
 
@@ -114,7 +114,7 @@ h3 {
 }
 
 .slide-arrow.next-icon {
-  right: 0.3rem;
+  right: 0;
   border-bottom-left-radius: 90px;
   border-top-left-radius: 90px;
 }
